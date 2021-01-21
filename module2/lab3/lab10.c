@@ -87,7 +87,8 @@ void fileoutput() {
 		fprintf(S1, "%s ", table[i]->time);
 		fprintf(S1, "%s ", table[i]->date);
 		fprintf(S1, "%d\n ", table[i]->cost);
-		//fprintf(S1, "\n");
+		if(i!=(iterator-1))
+{fprintf(S1, "\n");}
 	}
 	fclose(S1);
 }
