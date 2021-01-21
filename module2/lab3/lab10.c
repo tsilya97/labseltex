@@ -15,6 +15,7 @@ struct fly {
 	char date[9];
 	
 };
+char* filename="exemple.txt";  // строковая константа 
 struct fly *str;
 struct fly *table[50];
 int iterator = 0;
@@ -50,7 +51,7 @@ void output() {
 }
 void fileinput() {
 	FILE *S1;
-	if ((S1 = fopen("C:\\Users\\tsilya\\source\\repos\\Eltex3si\\exemple.txt", "r")) == NULL) {
+	if ((S1 = fopen(filename, "r")) == NULL) {
 		printf("Eror file");
 	}
 	while (!feof(S1)) {
@@ -75,7 +76,7 @@ void fileinput() {
 }
 void fileoutput() {
 	FILE *S1;
-	if ((S1 = fopen("C:\\Users\\tsilya\\source\\repos\\Eltex3si\\exemple.txt", "w")) == NULL) {
+	if ((S1 = fopen(filename, "w")) == NULL) {
 		printf("Eror file");
 	}
 	for (int i = 0;i < iterator;i++) {
