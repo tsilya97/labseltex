@@ -1,0 +1,42 @@
+#!/bin/bash
+echo Hi, choose folder!
+read foldername         #считывание имени целевого каталога
+echo "Введите количество папок"
+read number
+echo "Введите шаблон имени папок"
+read folder
+echo "Введите количество файлов"
+read numberfile
+echo "Введите шаблон имени файлов"
+read filename
+cd "$(dirname "$(find /home -type d -name "$foldername")")"     #поиск каталога
+flag=true                 #флаг для успешной записи в каталог
+while [ $flag = true ]
+do
+echo $flag
+read kek
+cd $foldername         #переход в целевой каталог
+if [ $? -eq 0 ]        #проверка на успешное выполнение предыдущей команды
+then
+echo "Успешный вход в каталог" 
+
+    for((i=1; i<($number+1);i++))       
+    do
+        for((j=1;j<($numberfile+1);j++))
+        do
+        mkdir -p $i$folder        #создание  папок
+        cd $i$folder               #переход в папку
+        touch $j$filename     # создание пустого файла
+        cd ..                     #переход в целевой каталог
+        done
+    done
+flag=false                   #скрипт успешно отработал
+read kek2
+
+else 
+echo "не удалось попасть в каталог, создайте новый:"
+read newfolder              #считывается назвние нового каталога
+mkdir -p $newfolder         # создание каталога
+foldername=$newfolder         #присваивание целевому каталогу  имени созданного 
+fi
+done

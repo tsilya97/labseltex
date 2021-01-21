@@ -1,0 +1,31 @@
+#!/bin/bash
+echo Hi, choose folder!
+read foldername         #считывание имени целевого каталога
+cd "$(dirname "$(find /home -type d -name "$foldername")")"     #поиск каталога
+flag=true                #флаг для успешной записи в каталог
+while [ $flag = true ]
+do
+cd $foldername         #переход в целевой каталог
+if [ $? -eq 0 ]        #проверка на успешное выполнение предыдущей команды
+then
+echo "Успешный вход в каталог" 
+
+for i in {1..50}         
+do
+for j in {1..100}
+do
+mkdir -p $i/$j         #создание 50 папок и 100 подпапок в них
+cd $i/$j                #переход в подпапку
+touch file{1..200}      # создание пустого файла
+cd ..
+cd ..                     #переход в целевой каталог
+done
+done
+flag=false                   #скрипт успешно отработал
+else 
+echo "не удалось попасть в каталог, создайте новый:"
+read newfolder              #считывается назвние нового каталога
+mkdir -p $newfolder         # создание каталога
+foldername=$newfolder         #присваивание целевому каталогу  имени созданного 
+fi
+done
